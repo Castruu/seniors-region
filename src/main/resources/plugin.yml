@@ -1,0 +1,4 @@
+name: SeniorRegions
+version: '${project.version}'
+main: org.castruu.regions.SeniorRegions
+api-version: 1.19
