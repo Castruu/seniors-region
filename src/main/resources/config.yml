@@ -1,4 +1,0 @@
-mongodb:
-  database: senior_regions
-  collection: regions
-  connection-string: mongodb+srv://root:admin@plugin-cluster.wtxb4wz.mongodb.net/?retryWrites=true&w=majority
