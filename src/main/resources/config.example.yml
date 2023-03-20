@@ -1,0 +1,4 @@
+mongodb:
+  database: # your mongodb database name
+  collection: # your mongodb regions collection
+  connection-string: # your mongodb connection string
