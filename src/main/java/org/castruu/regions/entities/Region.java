@@ -4,21 +4,36 @@ import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Region {
     @BsonId
     private UUID uuid;
 
-    @BsonProperty("location")
-    private Location location;
+    @BsonProperty("start")
+    private Location start;
+
+    @BsonProperty("end")
+    private Location end;
+
+    @BsonProperty("whitelist")
+    private List<PlayerData> whitelist;
+
+    @BsonProperty("owner")
+    private PlayerData owner;
 
     public Region() {}
 
-    public Region(UUID uuid, Location location) {
+    public Region(UUID uuid, Location start, Location end, List<PlayerData> whitelist, PlayerData owner) {
         this.uuid = uuid;
-        this.location = location;
+        this.start = start;
+        this.end = end;
+        this.whitelist = whitelist;
+        this.owner = owner;
     }
 
     public UUID getUuid() {
@@ -29,11 +44,35 @@ public class Region {
         this.uuid = uuid;
     }
 
-    public Location getLocation() {
-        return location;
+    public Location getStart() {
+        return start;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setStart(Location start) {
+        this.start = start;
+    }
+
+    public Location getEnd() {
+        return end;
+    }
+
+    public void setEnd(Location end) {
+        this.end = end;
+    }
+
+    public List<PlayerData> getWhitelist() {
+        return whitelist;
+    }
+
+    public void setWhitelist(List<PlayerData> whitelist) {
+        this.whitelist = whitelist;
+    }
+
+    public PlayerData getOwner() {
+        return owner;
+    }
+
+    public void setOwner(PlayerData owner) {
+        this.owner = owner;
     }
 }

@@ -10,7 +10,7 @@ import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.castruu.regions.database.codecs.LocationCodecProvider;
+import org.castruu.regions.database.codecs.MinecraftCodecProvider;
 import org.castruu.regions.entities.Region;
 
 public class MongoDatabaseProvider {
@@ -34,7 +34,7 @@ public class MongoDatabaseProvider {
         ConnectionString connectionString = new ConnectionString(mongoDbConnectionString);
         CodecRegistry pojoCodecRegistry = CodecRegistries.fromProviders(
                 PojoCodecProvider.builder().register(Region.class).build(),
-                new LocationCodecProvider()
+                new MinecraftCodecProvider()
         );
         CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                 pojoCodecRegistry);

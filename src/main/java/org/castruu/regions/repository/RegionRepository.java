@@ -2,7 +2,6 @@ package org.castruu.regions.repository;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.lang.NonNull;
 import org.castruu.regions.database.MongoDatabaseProvider;
 import org.castruu.regions.entities.Region;
@@ -10,6 +9,8 @@ import org.castruu.regions.entities.Region;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class RegionRepository implements Repository<Region, UUID> {
 
@@ -31,22 +32,26 @@ public class RegionRepository implements Repository<Region, UUID> {
 
     @Override
     public Region find(@NonNull UUID id) {
-        return null;
+        FindIterable<Region> findRegion = regionCollection.find(eq("_id", id.toString()));
+        return findRegion.first();
     }
 
     @Override
     public Region create(@NonNull Region entity) {
-        InsertOneResult insertOneResult = regionCollection.insertOne(entity);
+        regionCollection.insertOne(entity);
         return entity;
     }
 
     @Override
     public Region update(@NonNull Region entity) {
-        return null;
+        return regionCollection.findOneAndReplace(
+                eq("_id", entity.getUuid().toString()),
+                entity
+        );
     }
 
     @Override
     public void delete(@NonNull Region entity) {
-
+        regionCollection.deleteOne(eq("_id", entity.getUuid().toString()));
     }
 }
