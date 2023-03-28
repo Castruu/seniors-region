@@ -8,6 +8,7 @@ import org.castruu.regions.entities.Region;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -31,9 +32,14 @@ public class RegionRepository implements Repository<Region, UUID> {
     }
 
     @Override
-    public Region find(@NonNull UUID id) {
+    public Optional<Region> find(@NonNull UUID id) {
         FindIterable<Region> findRegion = regionCollection.find(eq("_id", id.toString()));
-        return findRegion.first();
+        return Optional.ofNullable(findRegion.first());
+    }
+
+    public Optional<Region> findByName(@NonNull String name) {
+        FindIterable<Region> findRegion = regionCollection.find(eq("name", name));
+        return Optional.ofNullable(findRegion.first());
     }
 
     @Override

@@ -4,8 +4,6 @@ import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +11,9 @@ import java.util.UUID;
 public class Region {
     @BsonId
     private UUID uuid;
+
+    @BsonProperty("name")
+    private String name;
 
     @BsonProperty("start")
     private Location start;
@@ -74,5 +75,13 @@ public class Region {
 
     public void setOwner(PlayerData owner) {
         this.owner = owner;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

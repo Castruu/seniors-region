@@ -7,6 +7,7 @@ import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.castruu.regions.commands.RegionCommand;
 import org.castruu.regions.database.MongoDatabaseProvider;
 import org.castruu.regions.listeners.InteractEventListener;
 import org.castruu.regions.listeners.WandInteractEventListener;
@@ -35,6 +36,8 @@ public final class SeniorRegions extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new InteractEventListener(), this);
         Bukkit.getPluginManager().registerEvents(new WandInteractEventListener(), this);
+
+        setCommand("region", new RegionCommand("region"));
     }
 
     @Override
