@@ -12,6 +12,7 @@ import org.castruu.regions.entities.Region;
 import org.castruu.regions.services.RegionService;
 
 import java.util.List;
+import java.util.Set;
 
 public class InteractEventListener implements Listener {
 
@@ -29,7 +30,7 @@ public class InteractEventListener implements Listener {
         if (player.hasPermission(RegionPermissions.BYPASS.getPermission())) return;
         Region region = regionService.getRegionFromLocation(player.getLocation());
         if(region == null) return;
-        List<PlayerData> whitelist = region.getWhitelist();
+        Set<PlayerData> whitelist = region.getWhitelist();
         boolean isPlayerWhitelisted = whitelist
                 .stream()
                 .anyMatch(it -> it.getUuid().equals(player.getUniqueId()));

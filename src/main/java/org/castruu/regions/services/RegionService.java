@@ -12,6 +12,10 @@ public interface RegionService {
 
     boolean isInRegion(Region region, Location location);
 
+    Region createRegion(Region region);
+
+    Region updateRegion(Region region);
+
     List<Region> getAllRegions();
 
     Region getRegionByName(String name);

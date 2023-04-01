@@ -37,6 +37,19 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
+    public Region createRegion(Region region) {
+        if(regionRepository.findByName(region.getName()).isPresent()) {
+            throw new IllegalArgumentException("Region already exists");
+        }
+        return regionRepository.create(region);
+    }
+
+    @Override
+    public Region updateRegion(Region region) {
+        return regionRepository.update(region);
+    }
+
+    @Override
     public List<Region> getAllRegions() {
         return regionRepository.findAll();
     }

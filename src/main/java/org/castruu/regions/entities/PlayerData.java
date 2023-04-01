@@ -2,6 +2,7 @@ package org.castruu.regions.entities;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class PlayerData {
@@ -26,5 +27,20 @@ public class PlayerData {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PlayerData that = (PlayerData) o;
+
+        return Objects.equals(uuid, that.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid != null ? uuid.hashCode() : 0;
     }
 }

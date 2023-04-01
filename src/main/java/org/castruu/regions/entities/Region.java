@@ -1,16 +1,19 @@
 package org.castruu.regions.entities;
 
-import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 import org.bukkit.Location;
+import org.bukkit.inventory.Inventory;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Region {
+
     @BsonId
-    private UUID uuid;
+    private ObjectId id;
 
     @BsonProperty("name")
     private String name;
@@ -22,27 +25,27 @@ public class Region {
     private Location end;
 
     @BsonProperty("whitelist")
-    private List<PlayerData> whitelist;
+    private Set<PlayerData> whitelist = new HashSet<>(0);
 
     @BsonProperty("owner")
     private PlayerData owner;
 
     public Region() {}
 
-    public Region(UUID uuid, Location start, Location end, List<PlayerData> whitelist, PlayerData owner) {
-        this.uuid = uuid;
+    public Region(ObjectId id, Location start, Location end, Set<PlayerData> whitelist, PlayerData owner) {
+        this.id = id;
         this.start = start;
         this.end = end;
         this.whitelist = whitelist;
         this.owner = owner;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public ObjectId getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public Location getStart() {
@@ -61,11 +64,11 @@ public class Region {
         this.end = end;
     }
 
-    public List<PlayerData> getWhitelist() {
+    public Set<PlayerData> getWhitelist() {
         return whitelist;
     }
 
-    public void setWhitelist(List<PlayerData> whitelist) {
+    public void setWhitelist(Set<PlayerData> whitelist) {
         this.whitelist = whitelist;
     }
 
@@ -83,5 +86,20 @@ public class Region {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Region region = (Region) o;
+
+        return Objects.equals(id, region.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

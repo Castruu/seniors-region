@@ -19,17 +19,15 @@ import java.lang.reflect.Field;
 
 public final class SeniorRegions extends JavaPlugin {
 
-    private ServicesManager servicesManager;
     private MongoDatabaseProvider mongoDatabaseProvider;
-    private RegionRepository regionRepository;
 
     @Override
     public void onEnable() {
-        servicesManager = Bukkit.getServicesManager();
+        ServicesManager servicesManager = Bukkit.getServicesManager();
         mongoDatabaseProvider = new MongoDatabaseProvider(this);
         mongoDatabaseProvider.connect();
 
-        regionRepository = new RegionRepository(mongoDatabaseProvider);
+        RegionRepository regionRepository = new RegionRepository(mongoDatabaseProvider);
         RegionService regionService = new RegionServiceImpl(regionRepository);
 
         servicesManager.register(RegionService.class, regionService, this, ServicePriority.High);
